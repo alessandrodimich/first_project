@@ -4,8 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
-
+  <%= favicon_link_tag 'favicon.ico' %>
 
   <!-- Latest compiled and minified CSS -->
 
@@ -13,11 +12,23 @@
   <%= stylesheet_link_tag "http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css", "data-turbolinks-track" => true %>
   <%= stylesheet_link_tag "application" , media: "all", "data-turbolinks-track" => true %>
 
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag"//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js", "data-turbolinks-track" => true %>
+<!-- Import Font Awesome from the CDN -->
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+<!-- javascript -->
+ <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+<!-- EOS javascript (There will be more in the footer)  -->
+
 
   <!-- Prevent cross site request forgery -->
   <%= csrf_meta_tags %>
+  <!-- End of csrf -->
 
+
+<!-- Live reolad for development -->
+    <% if Rails.env.development? %>
+        <%= render 'shared/livereload' %>
+    <% end %>
+<!-- End of Live reload -->
 
 

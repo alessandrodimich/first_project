@@ -43,9 +43,19 @@ private
 
     def verify_if_not_signed_in
     unless current_user
-      flash[:warning] = "you need to be signed in !!"
+      flash[:warning] = "Please #{view_context.link_to('sign in here', login_path)} first".html_safe
+      store_location
       redirect_to root_url #or to the profile page
     end
+  end
+
+  def redirect_back_or(default)
+    redirect_to(session[:return_to] || default)
+    session.delete(:return_to)
+  end
+
+  def store_location
+    session[:return_to] = request.url if request.get?
   end
 
 

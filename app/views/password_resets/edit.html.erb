@@ -2,23 +2,16 @@
 
 <div class="container">
 
-      <% if @user.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+ <%= render shared/errors %>
 
   <div class="form-signin">
     <h2 class="form-signin-heading">Reset your password</h2>
+
     <%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
-    <%= f.password_field :password, :placeholder => "Password", :class => "form-control" %>
-    <%= f.password_field :password_confirmation, :placeholder => "Confirm Password", :class => "form-control" %>
-    <%= f.submit "Update Password", class: "btn btn-lg btn-primary btn-block" %>
+      <%= f.password_field :password, :placeholder => "Password", :class => "form-control" %>
+      <%= f.password_field :password_confirmation, :placeholder => "Confirm Password", :class => "form-control" %>
+      <%= f.submit "Update Password", class: "btn btn-lg btn-primary btn-block" %>
     <% end %>
+
   </div>
 </div>

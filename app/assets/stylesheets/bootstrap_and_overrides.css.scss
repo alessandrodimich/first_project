@@ -1,5 +1,7 @@
 
 /* Move down content because we have a fixed navbar that is 50px tall */
+/* New styles below */
+
 
 body {
   padding-top: 50px;
@@ -8,7 +10,10 @@ body {
 
 .navbar {
   margin-bottom: 20px;
+
 }
+
+/* To center anything in the navbar */
 
 .navbar-centered {
   position: absolute;
@@ -77,6 +82,8 @@ body {
   border-radius: 0px;
 }
 
+/*  Remove round edges from the buttons */
+
 .btn {
   border-radius: 0px;
 }
@@ -91,9 +98,11 @@ body {
   border-width: 0px;
 }
 
-// label error and success settings from singnin form
+//End of Signup form CSS
 
-/* New styles below */
+// label error and success settings from singnin form with Jquery validator
+
+
 
 label.valid {
   width: 24px;
@@ -112,5 +121,3 @@ label.error {
   padding-right: 0px;
   padding-top: 0px;
 }
-
-//End of Signup form CSS

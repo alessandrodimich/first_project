@@ -2,24 +2,24 @@
 <html lang="en">
 <head>
 
-  <%= render 'layouts/head' %>
-  <%= render 'layouts/shim' %>
+<%= render 'layouts/head' %>
+<%= render 'layouts/shim' %>
 
 </head>
-<body>
 
+<%= render 'layouts/navbar' %>
 
-  <%= render 'layouts/navbar' %>
+<p></p>
 
-  <p></p>
+<%= render 'layouts/messages' %>
 
-  <%= render 'layouts/messages' %>
+<%= yield %>
 
-  <%= yield %>
+<% if Rails.env.development? %>
+    <%= debug(params) %>
+<% end %>
 
-  <% if Rails.env.development? %>
-    <%= render 'layouts/debug_footer' %>
-  <% end %>
+<%= render 'layouts/javascripts' %>
 
 </body>
 </html>

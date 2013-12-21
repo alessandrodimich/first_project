@@ -30,6 +30,25 @@ $( "#signin-form" ).validate({
 
 });
 
+$( "#password-reset-form" ).validate({
+  rules: {
+    email: {
+        required: true,
+        email: true
+    },
+
+  },
+
+  highlight: function(element) {
+    $(element).closest('#form-control').removeClass('has-success').addClass('has-error');
+  },
+
+  unhighlight: function(element) {
+    $(element).closest('#form-control').removeClass('has-error').addClass('has-success');
+  }
+
+});
+
   //  $( "div.alert.alert-danger.alert-dismissable.fade.in" ).fadeOut( 7500 );
 
 }); // End of document ready

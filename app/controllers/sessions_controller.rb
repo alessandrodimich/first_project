@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       login_user(user, params[:remember_me])
       flash[:success] = "Logged in!"
-      redirect_to root_url
+      redirect_back_or(user)
 
     else
       flash[:danger] = "Email or Password is invalid!"

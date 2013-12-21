@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :verify_if_not_signed_in, only: [:index, :new, :create , :show]
-  before_action :authorized_user, only: [:edit, :update, :destroy]
+  before_action :authorized_event, only: [:edit, :update, :destroy]
 
   # GET /events
   # GET /events.json
@@ -31,7 +31,10 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
+        format.html {
+          redirect_to @event
+          flash[:success] = 'Event was successfully created.'
+        }
         format.json { render action: 'show', status: :created, location: @event }
       else
         format.html { render action: 'new' }
@@ -45,7 +48,9 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        format.html {
+          redirect_to @event
+          flash[:info] = 'Event was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -65,6 +70,7 @@ class EventsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.find(params[:id])
@@ -74,8 +80,8 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event).permit(:title, :description)
     end
-private
-    def authorized_user
+
+    def authorized_event
       unless current_user && current_user.id == @event.user_id
         flash[:warning] = "you are not authorized!!"
         redirect_to events_path
