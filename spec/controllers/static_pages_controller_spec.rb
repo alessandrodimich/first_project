@@ -2,6 +2,15 @@ require 'spec_helper'
 
 describe StaticPagesController do
 
+  describe "Home page" do
+
+    before { visit root_path }
+
+    page.should have_content('Sample App')
+    it { should have_title('First Project | Welcome') }
+    it { should_not have_title('| Home') }
+  end
+
   describe "GET 'home'" do
     it "returns http success" do
       get 'home'
