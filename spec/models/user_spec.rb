@@ -13,6 +13,7 @@ describe User do
     user = User.new
     user.should respond_to(:first_name)
     user.should respond_to(:last_name)
+    user.should respond_to(:last_name)
   end
 end
 

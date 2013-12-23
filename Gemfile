@@ -4,7 +4,7 @@ ruby '2.0.0'
 # With gemset rails4_projects
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0'
+gem 'rails', '4.0.2'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '0.17.0'
@@ -51,9 +51,9 @@ group :doc do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 2.14.0'
+  gem 'rspec-rails', '2.13.1'
   gem 'guard-livereload', '2.0.0'
-  gem 'guard-rspec', '4.0.3'
+  gem 'guard-rspec', '2.5.0'
   gem 'spork-rails', '4.0.0'
   gem 'guard-spork', '1.5.1'
   gem 'childprocess', '0.3.9'
@@ -66,7 +66,7 @@ group :test do
 end
 
 # Use ActiveModel has_secure_password
-  gem 'bcrypt-ruby', '~> 3.0.0'
+  gem 'bcrypt-ruby', '3.1.2'
 
 # Use unicorn as the app server
 # gem 'unicorn'
