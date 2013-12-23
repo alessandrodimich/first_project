@@ -7,10 +7,10 @@ class UsersController < ApplicationController
 
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  before_action :authorized_user, only: [:edit, :update]
+  before_action :authorized_user, only: [:edit, :update, :destroy]
 
   def index
-    @users = User.all
+    @users = User.paginate(page: params[:page])
   end
 
   def new
@@ -48,6 +48,14 @@ class UsersController < ApplicationController
     end
   end
 
+
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = "User deleted."
+    redirect_to users_url
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -65,8 +73,8 @@ class UsersController < ApplicationController
     end
 
     def authorized_user
-      unless current_user && current_user.id == @user.id
-      flash[:warning] = "you are not authorized to edit other people's profiles!!"
+      unless current_user &&  ( current_user.id = @user.id || @user.admin?)
+      flash[:warning] = "you are not authorized to perform this action!"
       redirect_to users_path
       end
     end

@@ -7,6 +7,7 @@ describe "User Pages" do
       # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
       get users_path
       response.status.should be(302)
+      response.body.should have_content("First")
 
     end
   end

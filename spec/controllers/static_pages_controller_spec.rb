@@ -6,7 +6,7 @@ describe StaticPagesController do
 
     before { visit root_path }
 
-    page.should have_content('Sample App')
+    it { should have_content('NEW PROJECT') }
     it { should have_title('First Project | Welcome') }
     it { should_not have_title('| Home') }
   end
@@ -57,6 +57,7 @@ describe StaticPagesController do
     it "returns http success" do
       get 'welcome'
       response.should be_success
+      page.should have_content("PROJECT")
     end
   end
 

@@ -1,7 +1,7 @@
   <% if @user.errors.any? %>
   <div class="alert alert-danger alert-dismissable fade in">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <h2> The form contains the following<%= pluralize(@user.errors.count, "error") %>:</h2>
+    <h3> The form contains <%= pluralize(@user.errors.count, "error") %>:</h2>
     <ul>
       <% @user.errors.full_messages.each do |message| %>
       <li><%= message %></li>

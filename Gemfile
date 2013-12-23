@@ -11,6 +11,9 @@ gem 'pg', '0.17.0'
 
 gem 'faker', '1.2.0'
 
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
+
 group :production do
   # Include Rails12Factor for Heroku
   gem 'rails_12factor', '0.0.2'
@@ -48,7 +51,7 @@ group :doc do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 2.14.6' # '2.14.6'
+  gem 'rspec-rails', '~> 2.14.0'
   gem 'guard-livereload', '2.0.0'
   gem 'guard-rspec', '4.0.3'
   gem 'spork-rails', '4.0.0'
