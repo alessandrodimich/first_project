@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   layout 'basic', only: :new
 
   before_action :verify_if_signed_in, only: [:new, :create]
-  before_action :verify_if_not_signed_in, only: [:index, :show, :edit, :update]
+  before_action :verify_if_not_signed_in, only: [:index, :edit, :update]
 
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -14,9 +14,7 @@ class UsersController < ApplicationController
   end
 
   def new
-
     @user = User.new
-    @title = "Sign up"
   end
 
   def create
@@ -33,7 +31,7 @@ class UsersController < ApplicationController
   end
 
   def show
-
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
 
   def edit
@@ -73,7 +71,7 @@ class UsersController < ApplicationController
     end
 
     def authorized_user
-      unless current_user &&  ( current_user.id = @user.id || @user.admin?)
+      unless current_user &&  ( current_user.id == @user.id || current_user.admin?)
       flash[:warning] = "you are not authorized to perform this action!"
       redirect_to users_path
       end

@@ -19,4 +19,12 @@ describe Micropost do
     before { @micropost.user_id = nil }
     it { should_not be_valid }  # Introduce has many association and belongs_to user
   end
+
+  describe "with blank content" do
+    before { @micropost.content = " " }
+    it { should_not be_valid }  #check validates presence of content
+   end
+
+
+
 end

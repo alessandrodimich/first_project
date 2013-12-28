@@ -1,8 +1,7 @@
 <% provide(:title, "Edit user") %>
-
 <div class="container">
 
-  <%= render 'shared/errors' %>
+<%= render 'shared/errors', object: @user %>
 
   <div class="form-signin">
     <h2 class="form-signin-heading">Update Your profile</h2>
@@ -12,7 +11,7 @@
     <%= f.text_field :user_name, :placeholder => "Username", :class => "form-control" %>
     <%= f.email_field :email, :placeholder => "Email", :class => "form-control" %>
     <%= f.password_field :password, :placeholder => "Password", :class => "form-control" %>
-    <%= f.password_field :password_confirmation, :placeholder => "Password", :class => "form-control" %>
+    <%= f.password_field :password_confirmation, :placeholder => "Password Confirmation", :class => "form-control" %>
     <%= f.submit "Save changes", class: "btn btn-lg btn-primary btn-block" %>
     <% end %>
   </div>

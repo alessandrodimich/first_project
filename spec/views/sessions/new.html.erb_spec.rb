@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe "sessions/new.html.erb" do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  it "should have title login" do
+    visit login_path
+    expect(page).to have_title(full_title("Sign In"))
+  end
 end

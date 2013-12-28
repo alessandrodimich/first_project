@@ -2,6 +2,11 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
 /* New styles below */
 
+/* color definitions */
+$GrayLight: #999;
+/* End of color definitions */
+
+
 
 body {
   padding-top: 50px;
@@ -121,3 +126,32 @@ label.error {
   padding-right: 0px;
   padding-top: 0px;
 }
+
+/* microposts */
+
+.microposts {
+  list-style: none;
+  margin: 0 0 0 0;
+
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+}
+.content {
+  display: block;
+}
+.timestamp {
+  color: $GrayLight;
+}
+.gravatar {
+  float: left;
+  margin-right: 10px;
+}
+aside {
+  textarea {
+    height: 100px;
+    margin-bottom: 5px;
+  }
+}
+/* End of microposts styles */

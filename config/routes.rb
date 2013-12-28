@@ -1,10 +1,12 @@
 FirstProject::Application.routes.draw do
 
   resources :events
+  resources :microposts, only: [:create, :destroy]
 
   root 'static_pages#welcome'
 
   #match 'browser extension' to 'controller#action' as routing_path
+  match 'home', to: 'static_pages#home', as: 'home', via: 'get'
   match 'reset-password', to: 'password_resets#new', as: 'reset_password', via: 'get'
   match 'signup', to: 'users#new', as: 'signup', via: 'get'
   match 'login', to: 'sessions#new', as: 'login', via: 'get'

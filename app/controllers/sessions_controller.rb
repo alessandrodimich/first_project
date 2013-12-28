@@ -5,7 +5,6 @@ class SessionsController < ApplicationController
   before_filter :verify_if_signed_in, except: :destroy
 
   def new
-    @title = "Sign in"
   end
 
   def create

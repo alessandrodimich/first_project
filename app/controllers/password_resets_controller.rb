@@ -5,7 +5,6 @@ class PasswordResetsController < ApplicationController
   before_filter :verify_if_signed_in, only: [ :edit, :create ]
 
   def new
-    @title = "Reset Password"
   end
 
   def create

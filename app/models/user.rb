@@ -1,8 +1,8 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
 
-  has_many :events
-  has_many :microposts
+  has_many :events, dependent: :destroy
+  has_many :microposts, dependent: :destroy
 
   has_secure_password
 
@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :user_name, message: "%{value} has already been taken"
   validates_uniqueness_of :email, message: "%{value} is already registered"
   validates_format_of :email, with: /\A[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+[a-zA-Z]{2,}\Z/, on: :create, message: "format is not valid"
-  validates_format_of :user_name, with: /\A[a-zA-Z0-9_-]{2,}\Z/, message: "can only contain letters, numbers, spaces, dots, apostrophes and must be at least 2 characters long"
+  validates_format_of :user_name, with: /\A[a-zA-Z0-9_-]{2,}\Z/, message: "can only contain letters, numbers, spaces, apostrophes and must be at least 2 characters long"
   validates_format_of :first_name, with: /\A[a-zA-Z. ']{2,}\Z/, message: "can only contain letters, spaces, dots, apostrophes and must be at least 2 characters long"
   validates_format_of :last_name, with: /\A[a-zA-Z. ']{2,}\Z/, message: "can only contain letters, spaces, dots, apostrophes and must be at least 2 characters long"
 
@@ -33,6 +33,11 @@ class User < ActiveRecord::Base
       self.password_reset_sent_at = Time.now
       self.update_columns(:password_reset_token => self.password_reset_token, :password_reset_sent_at => self.password_reset_sent_at )
       UserMailer.reset_password(self).deliver
+  end
+
+  def feed
+    # This is preliminary. See "Following users" for the full implementation.
+    microposts
   end
 
 

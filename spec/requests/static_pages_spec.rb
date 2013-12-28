@@ -21,16 +21,27 @@ describe "Static pages" do
     it { should have_title('First Project | Welcome') }
     it { should_not have_title('| Home') }
   end
-end
 
-  #   describe "for signed-in users" do
-  #     let(:user) { FactoryGirl.create(:user) }
-  #     before do
-  #       FactoryGirl.create(:micropost, user: user, content: "Lorem")
-  #       FactoryGirl.create(:micropost, user: user, content: "Ipsum")
-  #       sign_in user
-  #       visit root_path
-  #     end
+  describe "for signed-in users" do
+    let(:user) { FactoryGirl.create(:user) }
+    before do
+      FactoryGirl.create(:micropost, user: user, content: "Lorem")
+      FactoryGirl.create(:micropost, user: user, content: "Ipsum")
+      login_user user
+      visit root_path
+    end
+    it "should render the user's feed" do
+        user.feed.each do |item|
+          expect(page).to have_selector("li##{item.id}", text: item.content)
+        end
+    end
+  end
+
+
+
+end # END OF describe "Static pages"
+
+
 
   #     it "should render the user's feed" do
   #       user.feed.each do |item|

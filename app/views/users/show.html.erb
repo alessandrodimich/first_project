@@ -1,9 +1,14 @@
+<%= provide(:title, "#{full_name(@user)}") %>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= full_name(@user) %>
-</p>
+
+<div class="row">
+  <div class="col-xs-8 col-xs-offset-1">
+    <p>
+      <strong>Name:</strong>
+      <%= full_name(@user) %>
+      </p>
 
 <p>
   <strong>Username:</strong>
@@ -14,6 +19,14 @@
   <strong>Email:</strong>
   <%= @user.email %>
 </p>
+  </div>
+</div>
+
+
+
+
+
+<%= render 'microposts' %>
 
 
 <%= link_to 'Edit', edit_user_path(@user) %>

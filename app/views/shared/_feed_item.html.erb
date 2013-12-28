@@ -1,0 +1,10 @@
+<li id="<%= feed_item.id %>">
+  <a href="<%= feed_item.user %>"><img src="http://placehold.it/52x52"></a>
+  <span class="user">
+    <%= link_to full_name(feed_item.user), feed_item.user %>
+  </span>
+  <span class="content"><%= feed_item.content %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
+  </span>
+</li>

@@ -15,22 +15,23 @@
 <!-- Import Font Awesome from the CDN -->
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
-<!-- javascript -->
+<!-- javascript basic files-->
  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-<!-- EOS javascript (There will be more in the footer)  -->
 
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+ <%= javascript_include_tag"//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js", "data-turbolinks-track" => true %>
+<!-- EOS javascript basic files-->
 
-  <!-- Include Jquery fade in method to the page -->
+<!-- Include Jquery fade in method to the page -->
+<!-- Uncommment the following lines if you want to disable document fade in -->
   <script>
     $(function()
     {
       $('body').hide().fadeIn(1000);
     });
   </script>
-  <!-- End of JQuery -->
+<!-- End of JQuery fade in-->
 
-  <%= javascript_include_tag"//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js", "data-turbolinks-track" => true %>
+
 
 
 
