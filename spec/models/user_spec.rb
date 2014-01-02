@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
 
-  it "should have a many attributes" do
+  it "should have  validate the following attributes" do
     user = User.new
     user.should respond_to(:first_name)
     user.should respond_to(:last_name)
@@ -11,6 +11,10 @@ describe User do
     user.should respond_to(:password)
     user.should respond_to(:microposts)
     user.should respond_to(:feed)
+    user.should respond_to(:relationships)
+    user.should respond_to(:followed_users)
+    user.should respond_to(:following?)
+    user.should respond_to(:follow!)
   end
 
   before do
@@ -59,10 +63,29 @@ describe User do
       its(:feed) { should include(older_micropost) }
       its(:feed) { should_not include(unfollowed_post) }
     end
-
-
-
   end #End of Micropost Associations
+
+  describe "following" do
+    let(:other_user) { FactoryGirl.create(:user) }
+    before do
+      @user.save!
+      @user.follow!(other_user)
+    end
+    it { should be_following(other_user) }
+    its(:followed_users) { should include(other_user) }
+
+    describe "followed_user" do
+      subject { other_user }
+      its(:followers) { should include(@user)}
+    end
+
+
+    describe "and unfollowing" do
+      before { @user.unfollow!(other_user) }
+      it { should_not be_following(other_user)}
+      its(:followed_users) { should_not include(other_user)}
+    end
+  end
 
 end
 

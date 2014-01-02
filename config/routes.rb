@@ -2,6 +2,7 @@ FirstProject::Application.routes.draw do
 
   resources :events
   resources :microposts, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
 
   root 'static_pages#welcome'
 
@@ -26,6 +27,12 @@ FirstProject::Application.routes.draw do
   get "static_pages/start"
   get "static_pages/test_page"
   get "static_pages/theme"
+
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
 
 
 

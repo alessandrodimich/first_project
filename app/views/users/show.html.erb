@@ -10,17 +10,29 @@
       <%= full_name(@user) %>
       </p>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.user_name %>
-</p>
+    <p>
+      <strong>Username:</strong>
+      <%= @user.user_name %>
+    </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </p>
+
+    <section>
+      <%= render 'shared/stats' %>
+    </section>
+    <br>
+    <section>
+      <%= render 'follow_form' if current_user %>
+    </section>
+
+
   </div>
 </div>
+
+
 
 
 

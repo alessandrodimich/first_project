@@ -1,10 +1,10 @@
 FactoryGirl.define do
 
-  factory :admin_user do
-    first_name     "Alessandro"
-    last_name "Dimich"
-    email    "dimich.alessandro@gmail.com"
-    user_name "dimich-admin"
+  factory :user do
+    sequence(:first_name)  { |n| "Name#{n}" }
+    sequence(:last_name)  { |n| "LastName#{n}" }
+    sequence(:user_name)  { |n| "user_name#{n}" }
+    sequence(:email) { |n| "username_#{n}@example.com"}
     password "foobar"
     password_confirmation "foobar"
 
@@ -13,33 +13,13 @@ FactoryGirl.define do
     end
   end
 
-  factory :user do
-    first_name     "Foo"
-    last_name "Bar"
-    email    "alessandro.dimich@gmail.com"
-    user_name "dimich-foobar"
-    password "foobar"
-    password_confirmation "foobar"
-
-  end
-
-  factory :new_user do
-    first_name     "Alessandro"
-    last_name "Dimich"
-    email    "dimichsubs@gmail.com"
-    user_name "dimich71"
-    password "foobar"
-    password_confirmation "foobar"
-
+  factory :micropost do
+    content "Lorem ipsum"
+    user
   end
 
   factory :event do
     name "Test Event"
-    user
-  end
-
-  factory :micropost do
-    content "Lorem ipsum"
     user
   end
 
