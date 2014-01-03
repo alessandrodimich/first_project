@@ -1,5 +1,8 @@
 require 'spec_helper'
 
+
+
+
 describe "User Pages-" do
 
   describe "Check pages response codes" do
@@ -106,6 +109,62 @@ describe "User Pages-" do
       it { should have_content(m2.content) }
       it { should have_content(user.microposts.count) }
     end
+
+    describe "follow/unfollow buttons" do
+      let(:other_user) { FactoryGirl.create(:user) }
+      before { login_user user }
+
+      describe "following a user" do
+        before { visit user_path(other_user) }
+
+        it "should increment the user count" do
+          expect do
+            click_button "Follow"
+          end.to change(user.followed_users, :count).by(1)
+        end
+
+        it "should increment the other user's followers count" do
+          expect do
+            click_button "Follow"
+          end.to change(other_user.followers, :count).by(1)
+        end
+
+        describe "toggling the button" do
+          before { click_button "Follow" }
+          it { should have_xpath("//input[@value='Unfollow']") }
+        end
+
+      end # END "following a user"
+
+      describe "unfollowing a user" do
+
+        before do
+          user.follow!(other_user)
+          visit user_path(other_user)
+        end
+
+        it "should decrement the followed user count" do
+          expect do
+            click_button "Unfollow"
+          end.to change(user.followed_users, :count).by(-1)
+        end
+
+        it "should decrement the other user's followers count" do
+          expect do
+            click_button "Unfollow"
+          end.to change(other_user.followers, :count).by(-1)
+        end
+
+        describe "toggling the button" do
+          before { click_button "Unfollow" }
+          it { should have_xpath("//input[@value='Follow']") }
+        end
+
+
+      end # END "unfollowing a user"
+
+    end # END "follow/unfollow buttons"
+
   end
 
 
@@ -141,21 +200,45 @@ describe "User Pages-" do
     end
   end
 
+  describe "following/followers" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:other_user) { FactoryGirl.create(:user) }
+    before { user.follow!(other_user) }
+
+    describe "followed users" do
+      before do
+        login_user user
+        visit following_user_path(user)
+      end
+
+      it { should have_title(full_title('Following')) }
+      it { should have_selector('h3', text: 'Following') }
+      it { should have_link(full_name(other_user), href: user_path(other_user)) }
+    end
+
+    describe "followers" do
+      before do
+        login_user other_user
+        visit followers_user_path(other_user)
+      end
+
+      it { should have_title(full_title('Followers')) }
+      it { should have_selector('h3', text: 'Followers') }
+      it { should have_link(full_name(user), href: user_path(user)) }
+    end
+  end
+
+
 end  #End of describe User Pages
 
 describe "Authentication" do
-
-
 
   describe "authorization" do
 
     describe "for non-signed-in users" do
       let(:user) { FactoryGirl.create(:user) }
 
-
-
       describe "in the Microposts controller" do
-
         describe "submitting to the create action" do
           before { post microposts_path }
           specify { expect(response).to redirect_to(login_path) }
@@ -167,7 +250,18 @@ describe "Authentication" do
         end
       end
 
+      describe "in the users controller" do
 
+          describe "visiting the following page" do
+            before { visit following_user_path(user) }
+            it { should_not have_title(full_title("Following")) }
+          end
+
+          describe "visiting the followers page" do
+            before { visit followers_user_path(user) }
+            it { should have_title('Sign in') }
+          end
+      end
 
     end
   end
